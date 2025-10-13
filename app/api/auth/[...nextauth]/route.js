@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import mongoose from "mongoose";
 import User from "@/models/user";
-import Payment from "@/models/payment";
 
 // Small helper to reuse a mongoose connection in dev to avoid multiple connections
 async function connectDB() {

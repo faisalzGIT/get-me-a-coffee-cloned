@@ -55,6 +55,7 @@ export default function Home() {
                 alt={item.title}
                 width={90}
                 height={90}
+                unoptimized
                 className="mb-4"
               />
               <h3 className="font-bold text-sky-100 text-lg mb-2">{item.title}</h3>

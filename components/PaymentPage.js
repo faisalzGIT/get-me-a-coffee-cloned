@@ -1,13 +1,29 @@
-"use client"
-import React, { useState } from 'react'
+// Client Component
+'use client'
+import React, { useEffect, useState } from 'react'
 import Script from 'next/script'
 import Image from 'next/image'
-import { initiate } from '@/actions/useractions'
-import { useSession } from 'next-auth/react'
-import Username from '@/app/[username]/page'
+import { initiate, fetchuser, fetchPayments } from '@/actions/useractions'
 
 
 const PaymentPage =  ({ username }) => {
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    //Code for listing the supporters starts here
+    const [currentUser, setCurrentUser] = useState({});
+    const [payments, setPayments] = useState([]);
+
+    const getData = async () => {
+        let u = await fetchuser(username);
+        setCurrentUser(u);
+        let dbpayments = await fetchPayments(username);
+        setPayments(dbpayments);
+    } //Code for listing the supporters ends here
+
+
 
     const [paymentform, setPaymentform] = useState({
         name: '',
@@ -24,43 +40,77 @@ const PaymentPage =  ({ username }) => {
     const [isLoading, setIsLoading] = useState(false)
 
 
-    // Move the initiate call into a handler
+    // Update handleSubmit to handle errors better
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        setIsLoading(true)
+        e.preventDefault();
+        setIsLoading(true);
         try {
-            //Get order ID
-            const response = await initiate(paymentform.amount, username, paymentform)
-            setOrderId(response.id)
-            pay(paymentform.amount)
+            if (!paymentform.amount || !paymentform.name) {
+                throw new Error('Please fill in all required fields');
+            }
+            const response = await initiate(paymentform.amount, username, paymentform);
+            console.log('Payment initiation response:', response);
+            
+            if (!response || !response.id) {
+                throw new Error('Invalid response from payment initiation');
+            }
+            
+            const orderId = response.id;
+            setOrderId(orderId);
+            console.log('Setting order ID:', orderId);
+            pay(Number(paymentform.amount), orderId);
         } catch (error) {
-            console.error('Payment initiation failed:', error)
+            console.error('Payment initiation failed:', error);
+            alert(error.message || 'Payment initiation failed. Please try again.');
         } finally {
             setIsLoading(false);
         }
     }
 
-    const pay = (amount) => {
-        var options = {
-            "key": process.env.KEY_ID, // Enter the Key ID generated from the Dashboard
-            "amount": amount, // Amount is in currency subunits. 
+    const pay = (amount, orderIdToUse) => {
+        console.log('Initiating payment with:', { amount, orderIdToUse });
+        const options = {
+            "key": process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+            "amount": amount * 100,
             "currency": "INR",
-            "name": "Get me a Coffee", //your business name
+            "name": "Get me a Coffee",
             "description": "Support Payment",
-            "image": "https://example.com/your_logo",
-            "order_id": orderId, // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            "callback_url": `${process.env.URL}/api/razorpay`,
-            "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-                "name": paymentform.name, //your customer's name
+            "image": "/coin.gif",
+            "order_id": orderIdToUse,
+            "handler": function (response) {
+                console.log('Payment successful, response:', response);
+                const formData = new FormData();
+                formData.append('razorpay_payment_id', response.razorpay_payment_id);
+                formData.append('razorpay_order_id', orderIdToUse); // Use the order ID we created
+                formData.append('razorpay_signature', response.razorpay_signature);
+
+                fetch('/api/razorpay', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = `/${username}?paymentdone=true`;
+                    } else {
+                        throw new Error('Payment verification failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Payment verification error:', error);
+                    alert('Payment verification failed. Please contact support.');
+                });
+            },
+            "prefill": {
+                "name": paymentform.name,
                 "email": "sample@example.com",
-                "contact": "+919876543210" //Provide the customer's phone number for better conversion rates 
+                "contact": "+919876543210"
             },
             "theme": {
                 "color": "#3399cc"
             }
-        }
-        var rzp1 = new Razorpay(options);
-        rzp1.open();
+        };
+        const razorpayInstance = new Razorpay(options);
+        razorpayInstance.open();
     }
 
     // In the form, update the submit handler
@@ -68,15 +118,23 @@ const PaymentPage =  ({ username }) => {
         <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
 
         <div className="firstSec">
-            <img className='h-[50vh] w-full' src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/4842667/452146dcfeb04f38853368f554aadde1/eyJ3IjoxNjAwLCJ3ZSI6MX0%3D/18.gif?token-hash=-am0VJ05gvbRaquqGKRaeH0UdwgTlQg-E6Bqu6ub0wI%3D&token-time=1759536000" alt="" />
+            <Image 
+                className="h-[70vh] w-full object-cover" 
+                src="/pp.jpg" 
+                alt="Profile Banner"
+                width={1920}
+                height={1080}
+                priority
+            />        
         </div>
         <div className="secondSec mb-[10vh]">
-            <div className="profileImg rounded-full w-full flex justify-center -mt-20">
+            <div className="profileImg rounded-full w-full flex justify-center -mt-100">
                 <Image
                     src="/pp.jpg"
                     alt="Profile"
                     width={160}
                     height={160}
+                    unoptimized
                     className="shadow-lg shadow-white rounded-full w-40 h-40 object-cover"
                 />
             </div>
@@ -109,13 +167,13 @@ const PaymentPage =  ({ username }) => {
             <div className="bg-[#161b22] rounded-xl p-8 flex-1 min-w-[300px] shadow-lg">
                 <h2 className="text-2xl font-bold mb-6">Supporters</h2>
                 <ul className="space-y-4">
-                    {[1, 2, 3].map((i) => (
+                    {payments.map(( p, i ) => (
                         <li key={i} className="flex items-center gap-3">
                             <span className="inline-block w-11 h-8 p-[1px] bg-gray-700 rounded-full items-center justify-center">
-                                <Image src="/avatar.gif" alt="avatar" width={30} height={30} />
+                                <Image src="/avatar.gif" alt="avatar" unoptimized width={30} height={30} />
                             </span>
                             <span className="text-base">
-                                <span className="font-semibold">Shubham</span> donated <span className="font-bold text-green-400">$30</span> with a message <span className="text-pink-400">"I support you bro. Lots of <span className='inline-block'>❤️</span>"</span>
+                                <span className="font-semibold">{p.name}</span> donated <span className="font-bold text-green-400">₹{p.amount}</span> with a message <span className="text-pink-400">"{p.message}"</span>
                             </span>
                         </li>
                     ))}
