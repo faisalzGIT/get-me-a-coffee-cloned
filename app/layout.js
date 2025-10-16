@@ -22,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full relative`} >
+      <body suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} antialiased h-full relative`}>
         <SessionWrapper>
             <Navbar />
             <div className="relative min-h-[86vh] h-full overflow-hidden bg-slate-950">
