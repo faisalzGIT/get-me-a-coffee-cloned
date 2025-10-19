@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+/* Custom Scrollbar Styles */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #e52e71 #1f2937;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #1f2937;
+    border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #e52e71 0%, #ff8a00 100%);
+    border-radius: 8px;
+    border: 2px solid #1f2937;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ff8a00 0%, #e52e71 100%);
+}
+
 @keyframes dropdownFade {
     from {
         opacity: 0;

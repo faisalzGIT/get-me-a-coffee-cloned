@@ -217,10 +217,10 @@ const PaymentPage = ({ username }) => {
             {/* Supporters List */}
             <div className="bg-[#161b22] rounded-xl p-4 sm:p-6 lg:p-8 flex-1 w-full md:w-1/2 shadow-lg h-[60vh]">
                 <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Supporters</h2>
-                <ul className="space-y-4 overflow-y-auto overflow-x-hidden max-h-[40vh] sm:max-h-[50vh] scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
+                <ul className="h-[45vh] space-y-4 overflow-y-auto overflow-x-hidden max-h-[40vh] sm:max-h-[50vh] custom-scrollbar">
                     {payments.length === 0 && <p className="text-gray-400 text-center">No supporters yet. Be the first to support!</p>}
                     {payments.map((p, i) => (
-                        <li key={i} className="flex items-start gap-3 bg-[#1f2937] p-3 rounded-lg">
+                        <li key={i} className="flex items-start gap-3 mr-1 bg-[#1f2937] p-3 rounded-lg">
                             <span className="flex-shrink-0 w-8 h-8 bg-gray-700 rounded-full overflow-hidden">
                                 <Image src="https://i.pinimg.com/736x/db/3a/62/db3a623acc8396fb285ec899ad01cd10.jpg" alt="avatar" className='w-full h-full object-cover' unoptimized width={32} height={32} />
                             </span>
