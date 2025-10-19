@@ -8,14 +8,22 @@ export const initiate = async (amount, to_username, paymentform) => {
     try {
         await connectDB();
 
+        // fetch the secret key of the user who is getting the payment
+        let user = await User.findOne({ username: to_username });
+        
+        const userKeyId = user.razorpayid;
+        const userSecretKey = user.razorpaysecret;
+        if(!userKeyId || !userSecretKey) throw new Error('Recipient has not set up Razorpay');
+        
+
         // Validate inputs
         if (!amount || !to_username || !paymentform.name) {
             throw new Error('Missing required fields');
         }
 
         const instance = new Razorpay({
-            key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-            key_secret: process.env.RAZORPAY_KEY_SECRET
+            key_id: userKeyId,
+            key_secret: userSecretKey
         });
 
         const options = {
@@ -119,6 +127,11 @@ export const updateProfile = async (data, oldusername) => {
             },
             { new: true, lean: true } // Return the updated document as a plain JS object
         );
+
+        //Now update all payments to reflect new username if it was changed
+        if (oldusername !== ndata.username) {
+            await Payment.updateMany({ to_user: oldusername }, { to_user: ndata.username });
+        }
 
         if (!result) {
             return { error: "Failed to update profile" };

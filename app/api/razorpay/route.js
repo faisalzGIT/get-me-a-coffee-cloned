@@ -2,6 +2,7 @@ import Payment from "@/models/payment";
 import { validatePaymentVerification } from "razorpay/dist/utils/razorpay-utils";
 import connectDb from "@/db/connectDB";
 import { NextResponse } from "next/server";
+import User from "@/models/user";
 
 export const POST = async (req) => {
     try {
@@ -34,6 +35,10 @@ export const POST = async (req) => {
             }, { status: 404 });
         }
 
+        // fetch the secret key of the user who is getting the payment
+        let user = await User.findOne({ username: payment.to_user });
+        const userSecretKey = user.razorpaysecret;
+        
         // Verify the payment
         const isValid = validatePaymentVerification(
             {
@@ -41,7 +46,7 @@ export const POST = async (req) => {
                 "payment_id": body.razorpay_payment_id
             }, 
             body.razorpay_signature, 
-            process.env.RAZORPAY_KEY_SECRET  // Using the correct env variable
+            userSecretKey  // Using the correct env variable
         );
 
         if(isValid){

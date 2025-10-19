@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const { Schema, model} = mongoose;
+const { Schema, model, models } = mongoose;
 
 const paymentSchema = new Schema({
     name: { type: String, required: true },
@@ -10,4 +10,4 @@ const paymentSchema = new Schema({
     done: { type: Boolean, default: false }
 }, { timestamps: true });
 
-export default mongoose.models.Payment || model("Payment", paymentSchema);      
+export default models.Payment || model("Payment", paymentSchema);      

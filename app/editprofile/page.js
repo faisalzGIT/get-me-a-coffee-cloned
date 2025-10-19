@@ -6,7 +6,7 @@ import { fetchuser, updateProfile } from '@/actions/useractions'
 import { set } from 'mongoose'
 import { ToastContainer, toast } from 'react-toastify';
 
-export default function DashboardForm() {
+export default function EditProfile() {
     const { data, update } = useSession()
     const router = useRouter()
 
@@ -109,7 +109,7 @@ export default function DashboardForm() {
         
         <div className="min-h-screen bg-slate-900 text-white grid place-items-start px-6 py-10">
             <div className="w-full max-w-3xl mx-auto">
-                <h1 className="text-3xl font-semibold text-center mb-8">Welcome to your Dashboard</h1>
+                <h1 className="text-3xl font-semibold text-center mb-8">Welcome to your Profile Editor</h1>
                 <form action={handleSubmit} className="space-y-4">
 
                     <div className="gridForSome grid grid-cols-2 grid-rows-2 gap-3">

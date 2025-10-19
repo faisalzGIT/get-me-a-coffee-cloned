@@ -9,21 +9,21 @@ const Login = () => {
 
     useEffect(() => {
         if (data) {
-            router.push("/dashboard");
+            router.push("/editprofile");
         }
     }, [data]);
 
     return (
         <>
-            <div className="flex flex-col items-center gap-2 min-h-[80vh] p-10 w-full ">
-                <div>
-                    <h1 className="text-6xl text-center font-bold mb-4 py-2  bg-gradient-to-bl from-pink-500 to-yellow-500 bg-clip-text text-transparent">Login</h1>
-                    <p className="text-lg md:text-xl text-white">Please choose a login method:</p>
+            <div className="flex flex-col items-center gap-4 min-h-[91vh] p-4 sm:p-6 lg:p-10 w-full max-w-md mx-auto">
+                <div className="text-center w-full">
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 py-2 bg-gradient-to-bl from-pink-500 to-yellow-500 bg-clip-text text-transparent">Login</h1>
+                    <p className="text-base sm:text-lg md:text-xl text-white mb-6">Please choose a login method:</p>
                 </div>
 
                 {/* Google */}
                 <button onClick={() => signIn("google")}
-                    className="w-[15vw] flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                    className="w-full sm:w-[80%] md:w-[70%] lg:w-[60%] flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md px-4 sm:px-6 py-3 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300"
                 >
                     <svg
                         className="h-6 w-6 mr-2"
@@ -52,10 +52,10 @@ const Login = () => {
 
                 {/* LinkedIn */}
                 <button
-                    className="w-[15vw] flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                    className="w-full sm:w-[80%] md:w-[70%] lg:w-[60%] flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md px-4 sm:px-6 py-3 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300"
                 >
                     <svg
-                        className="h-6 w-6 mr-2"
+                        className="h-5 w-5 sm:h-6 sm:w-6 mr-2 flex-shrink-0"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 48 48"
                     >
@@ -68,16 +68,15 @@ const Login = () => {
                             d="M12 19h6v18h-6V19zm3-9c1.9 0 3.1 1.2 3.1 3 0 1.7-1.2 3-3.1 3-1.8 0-3.1-1.3-3.1-3 0-1.8 1.3-3 3.1-3zm9 9h5.7v2.6h.1c.8-1.5 2.9-3.1 6-3.1 6.4 0 7.6 4.2 7.6 9.7V37h-6V27c0-2.4 0-5.5-3.4-5.5-3.4 0-3.9 2.6-3.9 5.3V37h-6V19z"
                         />
                     </svg>
-
                     <span>Continue with LinkedIn</span>
                 </button>
 
                 {/* Twitter */}
                 <button
-                    className="w-[15vw] flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                    className="w-full sm:w-[80%] md:w-[70%] lg:w-[60%] flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md px-4 sm:px-6 py-3 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300"
                 >
                     <svg
-                        className="h-6 w-6 mr-2"
+                        className="h-5 w-5 sm:h-6 sm:w-6 mr-2 flex-shrink-0"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 48 48"
                     >
@@ -91,7 +90,7 @@ const Login = () => {
 
                 {/* GitHub */}
                 <button onClick={() => signIn("github")}
-                    className="w-[15vw] flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                    className="w-full sm:w-[80%] md:w-[70%] lg:w-[60%] flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md px-4 sm:px-6 py-3 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300"
                 >
                     <svg
                         className="h-6 w-6 mr-2"
