@@ -13,31 +13,35 @@ A sophisticated creator monetization platform that enables seamless connections 
 </div>
 
 <div align="center">
-  <img src="./public/readmeImages/Navbar-Dropdown.png" width="52%" alt="Navigation" />
+  <img src="./public/readmeImages/Payment-Success.png" width="82%" alt="Payment Success" />
+</div>
+
+<div align="center">
+  <img src="./public/readmeImages/Razorpay-Process.png" width="82%" alt="Razorpay Gateway" />
 </div>
 
 <div align="center">
   <img src="./public/readmeImages/MongoDB-Data-Saving.png" width="48%" alt="MongoDB Data" />
-  <img src="./public/readmeImages/Dashboard-Mobile.png" width="48%" alt="Dashboard" />
+ 
 </div>
 
+
 <div align="center">
-  <img src="./public/readmeImages/Login-Mobile.png" width="48%" alt="Login Page" />
+  <img src="./public/readmeImages/Navbar-Dropdown.png" width="52%" alt="Navigation" />
 </div>
 
 ### Mobile Views
 
 <div align="center">
-  <img src="./public/readmeImages/Home-Mobile.png" width="32%" alt="Home - Mobile" />
-  <img src="./public/readmeImages/About-me.png" width="32%" alt="About Page" />
+ <img src="./public/readmeImages/Dashboard-Mobile.png" width="40%" alt="Dashboard" />
+  <img src="./public/readmeImages/Home-Mobile.png" width="40%" alt="Home - Mobile" />
 </div>
 
 <div align="center">
-  <img src="./public/readmeImages/Payment-Success.png" width="82%" alt="Payment Success" />
+  <img src="./public/readmeImages/About-me.png" width="40%" alt="About Page" />
+  <img src="./public/readmeImages/Login-Mobile.png" width="40%" alt="Login Page" />
 </div>
-<div align="center">
-  <img src="./public/readmeImages/Razorpay-Process.png" width="82%" alt="Razorpay Gateway" />
-</div>
+
 
 ---
 
