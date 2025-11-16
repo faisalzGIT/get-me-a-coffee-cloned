@@ -4,6 +4,33 @@ A sophisticated creator monetization platform that enables seamless connections 
 
 ---
 
+## 📸 Screenshots
+
+### Desktop Views
+<div align="center">
+  <img src="./public/readmeImages/Home-PC.png" width="48%" alt="Home - Desktop" />
+  <img src="./public/readmeImages/Dashboard-Mobile.png" width="48%" alt="Dashboard" />
+</div>
+
+<div align="center">
+  <img src="./public/readmeImages/Login-Mobile.png" width="48%" alt="Login Page" />
+  <img src="./public/readmeImages/MongoDB-Data-Saving.png" width="48%" alt="MongoDB Data" />
+</div>
+
+### Mobile Views
+<div align="center">
+  <img src="./public/readmeImages/Home-Mobile.png" width="32%" alt="Home - Mobile" />
+  <img src="./public/readmeImages/About-me.png" width="32%" alt="About Page" />
+  <img src="./public/readmeImages/Navbar-Dropdown.png" width="32%" alt="Navigation" />
+</div>
+
+<div align="center">
+  <img src="./public/readmeImages/Payment-Success.png" width="32%" alt="Payment Success" />
+  <img src="./public/readmeImages/Razorpay-Process.png" width="32%" alt="Razorpay Gateway" />
+</div>
+
+---
+
 ## 🛠️ Current Features
 
 ### Authentication & Security
